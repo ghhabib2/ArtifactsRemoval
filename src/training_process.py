@@ -449,7 +449,8 @@ def train_model(type_artifact,batch_size,learning_rate,num_epochs, filters_code)
     transform = transforms.Compose([transforms.ToPILImage(),transforms.Resize((224, 224)),transforms.ToTensor()])
     train_data, val_data, trainloader, valloader = prepare_data(type_artifact,train_all,val_all,batch_size,transform)
     print('Data prepared')
-    device = 'cuda:0' if torch.cuda.is_available() else 'cpu'     
+    # device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
+    device = 'mps' if torch.backends.mps.is_available() else 'cpu'
     model = ArtifactCNN().to(device)
     criterion, optimizer, scheduler = optim_sche(model,learning_rate)
     print('Training process is going to start')

@@ -1,0 +1,1 @@
+conda create -n mri_env python=3.8
